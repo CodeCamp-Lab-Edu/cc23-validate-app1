@@ -1,0 +1,169 @@
+/* LoginForm.css */
+input[type="number"] {
+  appearance: textfield;
+}
+
+.login-container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #333333;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  text-align: left;
+}
+
+.form-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+/* ซ่อนปุ่มลูกศรขึ้น-ลงของ input type="number" */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.text-error {
+  font-size: 0.85rem;
+  color: #e53e3e;
+  margin-top: 0.1rem;
+  font-weight: 500;
+}
+
+.submit-btn {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #3182ce;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #2b6cb0;
+}
+
+.submit-btn:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* API Results Box */
+.api-result-box {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background-color: #f7fafc;
+}
+
+.api-result-title {
+  font-weight: 700;
+  font-size: 1rem;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+}
+
+.api-success {
+  color: #2f855a;
+  font-size: 0.9rem;
+}
+
+.api-success-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.api-token {
+  font-family: monospace;
+  font-size: 0.75rem;
+  background-color: #edf2f7;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+.api-error {
+  color: #c53030;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.api-idle {
+  color: #718096;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.api-tips {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #ebf8ff;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #2b6cb0;
+  line-height: 1.4;
+}
+
+.api-tips p {
+  margin: 0.25rem 0;
+}
+
+.api-tips code {
+  background-color: rgba(66, 153, 225, 0.15);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
