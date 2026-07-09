@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginSchema } from "../schemas/loginSchema";
+import { login } from "../api/auth";
 import "./LoginPage.css";
 
 function LoginPage() {
@@ -9,13 +10,14 @@ function LoginPage() {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     // console.log(e.target.name, e.target.value);
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // const { email, password } = form;
 
@@ -24,10 +26,20 @@ function LoginPage() {
       //clear error ออก
       setErrors({});
 
-      alert("สำเร็จ");
+      //TODO: พร้อมยิง login
+      setIsSubmitting(true);
+      const data = await login(form);
+
+      if (data) {
+        alert("เข้าสู่ระบบสำเร็จ เย้");
+      } else {
+        alert("เข้าสู่ระบบไม่ได้");
+      }
+
+      setIsSubmitting(false);
     } else {
       const { fieldErrors } = result.error.flatten();
-      console.log(fieldErrors);
+      // console.log(fieldErrors);
 
       setErrors(fieldErrors);
 
@@ -66,7 +78,7 @@ function LoginPage() {
       <p className="login-title">Login</p>
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>อีเมล</label>
+          <label>ชื่อผู้ใช้หรืออีเมล</label>
           <input
             className="form-input"
             type="text"
@@ -87,11 +99,13 @@ function LoginPage() {
             value={form.password}
             onChange={handleChange}
           />
-          {errors.password && <p className="text-error">{errors.password[0]}</p>}
+          {errors.password && (
+            <p className="text-error">{errors.password[0]}</p>
+          )}
         </div>
 
-        <button type="submit" className="submit-btn">
-          เข้าสู่ระบบ
+        <button type="submit" disabled={isSubmitting} className="submit-btn">
+          {isSubmitting ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
         </button>
       </form>
     </div>

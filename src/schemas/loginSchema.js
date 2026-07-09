@@ -9,8 +9,8 @@ export const loginSchema = z.object({
     .refine(
       (val) => {
         // console.log(val + "<===== คือนี้นะ");
-        if (!val.includes("@")) {
-            console.log(z.email().safeParse(val).success)
+        if (val.includes("@")) {
+            // console.log(z.email().safeParse(val).success)
           return z.email().safeParse(val).success;
         }
         return true;
