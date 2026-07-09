@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { loginSchema } from "../schemas/loginSchema";
 import "./LoginPage.css";
 
 function LoginPage() {
@@ -16,31 +17,47 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = form;
-    const errorFields = {};
+    // const { email, password } = form;
 
-    if (!email) {
-      // console.log("ไม่ได้กรอกอีเมล")
-      errorFields.email = "กรุณากรอกอีเมล";
-    } else if (!email.includes("@")) {
-      errorFields.email = "รูปแบบอีเมลไม่ถูกต้อง";
+    const result = loginSchema.safeParse(form);
+    if (result.success) {
+      //clear error ออก
+      setErrors({});
+
+      alert("สำเร็จ");
+    } else {
+      const { fieldErrors } = result.error.flatten();
+      // console.log(fieldErrors);
+
+      setErrors(fieldErrors);
+
+      //  console.log("มี error อยู่")
     }
 
-    if (!password) {
-      errorFields.password = "กรุณากรอกรหัสผ่าน";
-    } else if (password.length < 6) {
-      errorFields.password = "รหัสผ่านต้องอย่างน้อย 6 ตัว";
-    }
+    // const errorFields = {};
 
-    setErrors(errorFields);
+    // if (!email) {
+    //   // console.log("ไม่ได้กรอกอีเมล")
+    //   errorFields.email = "กรุณากรอกอีเมล";
+    // } else if (!email.includes("@")) {
+    //   errorFields.email = "รูปแบบอีเมลไม่ถูกต้อง";
+    // }
 
-    if (Object.keys(errorFields).length === 0) {
-      alert("ส่งข้อมูลเรียบร้อย");
-      setForm({
-        email: "",
-        password: "",
-      });
-    }
+    // if (!password) {
+    //   errorFields.password = "กรุณากรอกรหัสผ่าน";
+    // } else if (password.length < 6) {
+    //   errorFields.password = "รหัสผ่านต้องอย่างน้อย 6 ตัว";
+    // }
+
+    // setErrors(errorFields);
+
+    // if (Object.keys(errorFields).length === 0) {
+    //   alert("ส่งข้อมูลเรียบร้อย");
+    //   setForm({
+    //     email: "",
+    //     password: "",
+    //   });
+    // }
     // console.log(errors, 1)
   };
 
@@ -58,7 +75,7 @@ function LoginPage() {
             placeholder="example@gmail.com"
             onChange={handleChange}
           />
-          {errors.email && <p className="text-error">{errors.email}</p>}
+          {errors.email && <p className="text-error">{errors.email[0]}</p>}
         </div>
 
         <div className="form-group">
