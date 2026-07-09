@@ -27,7 +27,7 @@ function LoginPage() {
       alert("สำเร็จ");
     } else {
       const { fieldErrors } = result.error.flatten();
-      // console.log(fieldErrors);
+      console.log(fieldErrors);
 
       setErrors(fieldErrors);
 
@@ -87,7 +87,7 @@ function LoginPage() {
             value={form.password}
             onChange={handleChange}
           />
-          {errors.password && <p className="text-error">{errors.password}</p>}
+          {errors.password && <p className="text-error">{errors.password[0]}</p>}
         </div>
 
         <button type="submit" className="submit-btn">
